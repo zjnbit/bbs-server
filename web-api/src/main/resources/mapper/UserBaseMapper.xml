@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjnbit.bbs.api.mapper.UserBaseMapper">
+    <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.UserBaseEntity">
+        <!--@mbg.generated-->
+        <!--@Table user_base-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="level" jdbcType="VARCHAR" property="level"/>
+        <result column="is_activated" jdbcType="BOOLEAN" property="isActivated"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,
+        mobile,
+        email,
+        username,
+        `password`,
+        nickname,
+        gender,
+        avatar,
+        score,
+        `status`,
+        `level`,
+        is_activated,
+        create_user,
+        create_time,
+        update_user,
+        update_time,
+        version,
+        is_deleted
+    </sql>
+</mapper>

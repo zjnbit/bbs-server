@@ -1,0 +1,203 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.14</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.zjnbit.bbs</groupId>
+    <artifactId>dependencies-spring-boot-starter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>定义项目的所有依赖的版本</description>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bbs.version>1.0-SNAPSHOT</bbs.version>
+        <dep.servlet-api.version>2.5</dep.servlet-api.version>
+        <dep.spring.boot.version>2.6.14</dep.spring.boot.version>
+        <dep.mysql-connector-java.version>8.0.31</dep.mysql-connector-java.version>
+        <dep.druid.version>1.2.16</dep.druid.version>
+        <dep.mybatis-plus.version>3.5.3.1</dep.mybatis-plus.version>
+        <dep.redisson.version>3.20.0</dep.redisson.version>
+        <dep.sa-token.version>1.34.0</dep.sa-token.version>
+        <dep.hutool.version>5.8.15</dep.hutool.version>
+        <dep.lombok.version>1.18.22</dep.lombok.version>
+        <dep.fastjson.version>1.2.83</dep.fastjson.version>
+        <dep.jackson.version>2.13.4</dep.jackson.version>
+        <dep.javax.mail.version>1.6.2</dep.javax.mail.version>
+        <dep.thymeleaf.version>3.1.0.RC2</dep.thymeleaf.version>
+        <dep.aliyun-sdk-oss.version>3.10.2</dep.aliyun-sdk-oss.version>
+        <dep.protobuf-java.version>3.21.5</dep.protobuf-java.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- bbs-framework -->
+            <dependency>
+                <groupId>com.zjnbit.bbs</groupId>
+                <artifactId>framework</artifactId>
+                <version>${bbs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjnbit.bbs</groupId>
+                <artifactId>dependencies-spring-boot-starter</artifactId>
+                <version>${bbs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjnbit.bbs</groupId>
+                <artifactId>db-spring-boot-starter</artifactId>
+                <version>${bbs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjnbit.bbs</groupId>
+                <artifactId>tools-spring-boot-starter</artifactId>
+                <version>${bbs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjnbit.bbs</groupId>
+                <artifactId>web-spring-boot-starter</artifactId>
+                <version>${bbs.version}</version>
+            </dependency>
+            <!-- spring-boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${dep.spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- servlet -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${dep.servlet-api.version}</version>
+            </dependency>
+            <!-- MySql驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${dep.mysql-connector-java.version}</version>
+            </dependency>
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${dep.druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+            </dependency>
+            <!-- MyBatis-Plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${dep.mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${dep.mybatis-plus.version}</version>
+            </dependency>
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${dep.lombok.version}</version>
+            </dependency>
+            <!-- 工具包 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${dep.hutool.version}</version>
+            </dependency>
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${dep.fastjson.version}</version>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jaxb-annotations</artifactId>
+                <version>${dep.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${dep.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${dep.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${dep.jackson.version}</version>
+            </dependency>
+            <!-- Sa-Token 权限认证 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-core</artifactId>
+                <version>${dep.sa-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${dep.sa-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-dao-redis-jackson</artifactId>
+                <version>${dep.sa-token.version}</version>
+            </dependency>
+            <!-- mail -->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${dep.javax.mail.version}</version>
+            </dependency>
+            <!-- 模版引擎 -->
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>${dep.thymeleaf.version}</version>
+            </dependency>
+            <!-- aliyun oss-->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${dep.aliyun-sdk-oss.version}</version>
+            </dependency>
+            <!-- protobuf -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${dep.protobuf-java.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>chenjy-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>https://nexus.chenjy.cn/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>chenjy-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>https://nexus.chenjy.cn/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

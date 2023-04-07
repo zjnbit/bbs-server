@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjnbit.bbs.api.mapper.BbsReplyMapper">
+    <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.BbsReplyEntity">
+        <!--@mbg.generated-->
+        <!--@Table bbs_reply-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="topic_id" jdbcType="BIGINT" property="topicId"/>
+        <result column="parent_reply_id" jdbcType="BIGINT" property="parentReplyId"/>
+        <result column="quote_reply_id" jdbcType="BIGINT" property="quoteReplyId"/>
+        <result column="post_user_id" jdbcType="BIGINT" property="postUserId"/>
+        <result column="post_user_nickname" jdbcType="VARCHAR" property="postUserNickname"/>
+        <result column="post_time" jdbcType="TIMESTAMP" property="postTime"/>
+        <result column="post_ip" jdbcType="VARCHAR" property="postIp"/>
+        <result column="like_count" jdbcType="INTEGER" property="likeCount"/>
+        <result column="reply_content" jdbcType="VARCHAR" property="replyContent"/>
+        <result column="is_anonymous" jdbcType="BOOLEAN" property="isAnonymous"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, topic_id, parent_reply_id, quote_reply_id, post_user_id, post_user_nickname,
+        post_time, post_ip, like_count, reply_content, is_anonymous, create_user, create_time,
+        update_user, update_time, version, is_deleted
+    </sql>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into bbs_reply
+        (id, topic_id, parent_reply_id, quote_reply_id, post_user_id, post_user_nickname,
+        post_time, post_ip, like_count, reply_content, is_anonymous, create_user, create_time,
+        update_user, update_time, version, is_deleted)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.topicId,jdbcType=BIGINT}, #{item.parentReplyId,jdbcType=BIGINT},
+            #{item.quoteReplyId,jdbcType=BIGINT}, #{item.postUserId,jdbcType=BIGINT},
+            #{item.postUserNickname,jdbcType=VARCHAR},
+            #{item.postTime,jdbcType=TIMESTAMP}, #{item.postIp,jdbcType=VARCHAR}, #{item.likeCount,jdbcType=INTEGER},
+            #{item.replyContent,jdbcType=VARCHAR}, #{item.isAnonymous,jdbcType=BOOLEAN},
+            #{item.createUser,jdbcType=BIGINT},
+            #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateUser,jdbcType=BIGINT},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.version,jdbcType=INTEGER}, #{item.isDeleted,jdbcType=BOOLEAN})
+        </foreach>
+    </insert>
+</mapper>

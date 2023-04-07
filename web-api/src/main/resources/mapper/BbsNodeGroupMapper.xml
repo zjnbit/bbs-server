@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjnbit.bbs.api.mapper.BbsNodeGroupMapper">
+    <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.BbsNodeGroupEntity">
+        <!--@mbg.generated-->
+        <!--@Table bbs_node_group-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, group_name, remark, sort, create_user, create_time, update_user, update_time,
+        version, is_deleted
+    </sql>
+</mapper>

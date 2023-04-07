@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjnbit.bbs.api.mapper.BbsUserFavoriteTopicMapper">
+    <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.BbsUserFavoriteTopicEntity">
+        <!--@mbg.generated-->
+        <!--@Table bbs_user_favorite_topic-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="favorite_id" jdbcType="BIGINT" property="favoriteId"/>
+        <result column="topic_id" jdbcType="BIGINT" property="topicId"/>
+        <result column="topic_title" jdbcType="VARCHAR" property="topicTitle"/>
+        <result column="post_user_id" jdbcType="BIGINT" property="postUserId"/>
+        <result column="post_user_name" jdbcType="VARCHAR" property="postUserName"/>
+        <result column="post_time" jdbcType="TIMESTAMP" property="postTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, user_id, favorite_id, topic_id, topic_title, post_user_id, post_user_name, post_time,
+        create_user, create_time, update_user, update_time, version, is_deleted
+    </sql>
+</mapper>

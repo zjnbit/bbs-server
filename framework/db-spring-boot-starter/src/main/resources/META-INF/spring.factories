@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.zjnbit.framework.db.config.DbAutoConfiguration,\
+  com.zjnbit.framework.db.handle.MyBatisPlusMetaHandler

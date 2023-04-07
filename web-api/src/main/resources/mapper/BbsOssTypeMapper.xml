@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjnbit.bbs.api.mapper.BbsOssTypeMapper">
+    <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.BbsOssTypeEntity">
+        <!--@mbg.generated-->
+        <!--@Table bbs_oss_type-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="oss_name" jdbcType="VARCHAR" property="ossName"/>
+        <result column="oss_type" jdbcType="VARCHAR" property="ossType"/>
+        <result column="bucket_name" jdbcType="VARCHAR" property="bucketName"/>
+        <result column="prefix" jdbcType="VARCHAR" property="prefix"/>
+        <result column="oss_host" jdbcType="VARCHAR" property="ossHost"/>
+        <result column="cdn_host" jdbcType="VARCHAR" property="cdnHost"/>
+        <result column="is_pub_read" jdbcType="BOOLEAN" property="isPubRead"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, oss_name, oss_type, bucket_name, `prefix`, oss_host, cdn_host, is_pub_read, create_user,
+        create_time, update_user, update_time, version, is_deleted
+    </sql>
+</mapper>

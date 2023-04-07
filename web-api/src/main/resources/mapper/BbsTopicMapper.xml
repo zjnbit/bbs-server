@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjnbit.bbs.api.mapper.BbsTopicMapper">
+    <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.BbsTopicEntity">
+        <!--@mbg.generated-->
+        <!--@Table bbs_topic-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="node_id" jdbcType="BIGINT" property="nodeId"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="status_detail" jdbcType="VARCHAR" property="statusDetail"/>
+        <result column="topic_title" jdbcType="VARCHAR" property="topicTitle"/>
+        <result column="post_user" jdbcType="BIGINT" property="postUser"/>
+        <result column="post_user_nickname" jdbcType="VARCHAR" property="postUserNickname"/>
+        <result column="post_time" jdbcType="TIMESTAMP" property="postTime"/>
+        <result column="post_ip" jdbcType="VARCHAR" property="postIp"/>
+        <result column="last_reply_user" jdbcType="BIGINT" property="lastReplyUser"/>
+        <result column="last_reply_user_nickname" jdbcType="VARCHAR" property="lastReplyUserNickname"/>
+        <result column="last_reply_time" jdbcType="TIMESTAMP" property="lastReplyTime"/>
+        <result column="last_reply_ip" jdbcType="VARCHAR" property="lastReplyIp"/>
+        <result column="is_anonymous" jdbcType="BOOLEAN" property="isAnonymous"/>
+        <result column="reply_count" jdbcType="INTEGER" property="replyCount"/>
+        <result column="like_count" jdbcType="INTEGER" property="likeCount"/>
+        <result column="favorite_count" jdbcType="INTEGER" property="favoriteCount"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, node_id, `status`, status_detail, topic_title, post_user, post_user_nickname,
+        post_time, post_ip, last_reply_user, last_reply_user_nickname, last_reply_time, last_reply_ip,
+        is_anonymous, reply_count, like_count, favorite_count, create_user, create_time,
+        update_user, update_time, version, is_deleted
+    </sql>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into bbs_topic
+        (id, node_id, `status`, status_detail, topic_title, post_user, post_user_nickname,
+        post_time, post_ip, last_reply_user, last_reply_user_nickname, last_reply_time,
+        last_reply_ip, is_anonymous, reply_count, like_count, favorite_count, create_user,
+        create_time, update_user, update_time, version, is_deleted)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.nodeId,jdbcType=BIGINT}, #{item.status,jdbcType=VARCHAR},
+            #{item.statusDetail,jdbcType=VARCHAR}, #{item.topicTitle,jdbcType=VARCHAR},
+            #{item.postUser,jdbcType=BIGINT},
+            #{item.postUserNickname,jdbcType=VARCHAR}, #{item.postTime,jdbcType=TIMESTAMP},
+            #{item.postIp,jdbcType=VARCHAR}, #{item.lastReplyUser,jdbcType=BIGINT},
+            #{item.lastReplyUserNickname,jdbcType=VARCHAR},
+            #{item.lastReplyTime,jdbcType=TIMESTAMP}, #{item.lastReplyIp,jdbcType=VARCHAR},
+            #{item.isAnonymous,jdbcType=BOOLEAN}, #{item.replyCount,jdbcType=INTEGER},
+            #{item.likeCount,jdbcType=INTEGER},
+            #{item.favoriteCount,jdbcType=INTEGER}, #{item.createUser,jdbcType=BIGINT},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateUser,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER},
+            #{item.isDeleted,jdbcType=BOOLEAN})
+        </foreach>
+    </insert>
+</mapper>
