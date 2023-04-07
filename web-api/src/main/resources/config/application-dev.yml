@@ -18,3 +18,24 @@ spring:
 logging:
   level:
     com.zjnbit.bbs: debug
+bbs:
+  aliyun:
+    security:
+      access-key-id: xxx
+      access-key-secret: xxx
+    oss:
+      bucket: xxx
+      endpoint: oss-cn-hongkong.aliyuncs.com
+      cdn-url: cdn.bbs.com
+      callback-url: https://bbs.simple.com/api/callback/oss/aliyun
+    cache:
+      address
+  mail:
+    host: smtpdm.bbs.com
+    port: 465
+    from: ZJNBIT<no-reply@notice.bbs.com>
+    user: no-reply@notice.bbs.com
+    pass: xxxxxxx
+    ssl-enable: true
+  secure:
+    jwt-secret-key: abcdefghijklmnopqrstuvwxyz

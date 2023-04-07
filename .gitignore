@@ -34,3 +34,4 @@ build/
 /log/
 /logs/
 /web-api/logs/
+/web-api/src/main/resources/config/application-local.yml

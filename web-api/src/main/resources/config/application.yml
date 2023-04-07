@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -35,8 +37,6 @@ spring:
         max-idle: 10
         # 连接池中的最小空闲连接
         min-idle: 0
-  profiles:
-    active: dev
 mybatis-plus:
   global-config:
     db-config:
