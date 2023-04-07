@@ -22,7 +22,7 @@ public class Result<T> {
 
     public Result() {
         if (StrUtil.isBlank(this.requestId)) {
-            this.requestId=getCurrentRequestId();
+            this.requestId = getCurrentRequestId();
         }
     }
 
@@ -31,7 +31,7 @@ public class Result<T> {
         this.errMsg = errMsg;
         this.data = data;
         if (StrUtil.isBlank(this.requestId)) {
-            this.requestId=getCurrentRequestId();
+            this.requestId = getCurrentRequestId();
         }
     }
 
@@ -53,7 +53,7 @@ public class Result<T> {
 
     private String getCurrentRequestId() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (null==attributes){
+        if (null == attributes) {
             return null;
         }
         HttpServletRequest request = attributes.getRequest();

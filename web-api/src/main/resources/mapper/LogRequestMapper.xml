@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjnbit.bbs.api.mapper.LogRequestMapper">
-  <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.LogRequestEntity">
-    <!--@mbg.generated-->
-    <!--@Table log_request-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="request_id" jdbcType="VARCHAR" property="requestId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="uri" jdbcType="VARCHAR" property="uri" />
-    <result column="method" jdbcType="VARCHAR" property="method" />
-    <result column="ua" jdbcType="LONGVARCHAR" property="ua" />
-    <result column="path_param" jdbcType="LONGVARCHAR" property="pathParam" />
-    <result column="body_param" jdbcType="LONGVARCHAR" property="bodyParam" />
-    <result column="ip" jdbcType="INTEGER" property="ip" />
-    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="consumed_time" jdbcType="INTEGER" property="consumedTime" />
-    <result column="response_code" jdbcType="VARCHAR" property="responseCode" />
-    <result column="response_msg" jdbcType="VARCHAR" property="responseMsg" />
-    <result column="response_data" jdbcType="LONGVARCHAR" property="responseData" />
-    <result column="create_by" jdbcType="BIGINT" property="createBy" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="version" jdbcType="INTEGER" property="version" />
-    <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, request_id, user_id, uri, `method`, ua, path_param, body_param, ip, begin_time, 
-    end_time, consumed_time, response_code, response_msg, response_data, create_by, create_time, 
-    update_by, update_time, version, is_deleted
-  </sql>
-  <insert id="batchInsert" parameterType="map">
-    <!--@mbg.generated-->
-    insert into log_request
-    (id, request_id, user_id, uri, `method`, ua, path_param, body_param, ip, begin_time, 
-      end_time, consumed_time, response_code, response_msg, response_data, create_by, 
-      create_time, update_by, update_time, version, is_deleted)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=BIGINT}, #{item.requestId,jdbcType=VARCHAR}, #{item.userId,jdbcType=BIGINT}, 
-        #{item.uri,jdbcType=VARCHAR}, #{item.method,jdbcType=VARCHAR}, #{item.ua,jdbcType=LONGVARCHAR}, 
-        #{item.pathParam,jdbcType=LONGVARCHAR}, #{item.bodyParam,jdbcType=LONGVARCHAR}, 
-        #{item.ip,jdbcType=INTEGER}, #{item.beginTime,jdbcType=TIMESTAMP}, #{item.endTime,jdbcType=TIMESTAMP}, 
-        #{item.consumedTime,jdbcType=INTEGER}, #{item.responseCode,jdbcType=VARCHAR}, #{item.responseMsg,jdbcType=VARCHAR}, 
-        #{item.responseData,jdbcType=LONGVARCHAR}, #{item.createBy,jdbcType=BIGINT}, #{item.createTime,jdbcType=TIMESTAMP}, 
-        #{item.updateBy,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER}, 
-        #{item.isDeleted,jdbcType=BOOLEAN})
-    </foreach>
-  </insert>
+    <resultMap id="BaseResultMap" type="com.zjnbit.bbs.api.model.entity.LogRequestEntity">
+        <!--@mbg.generated-->
+        <!--@Table log_request-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="request_id" jdbcType="VARCHAR" property="requestId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="uri" jdbcType="VARCHAR" property="uri"/>
+        <result column="method" jdbcType="VARCHAR" property="method"/>
+        <result column="ua" jdbcType="LONGVARCHAR" property="ua"/>
+        <result column="path_param" jdbcType="LONGVARCHAR" property="pathParam"/>
+        <result column="body_param" jdbcType="LONGVARCHAR" property="bodyParam"/>
+        <result column="ip" jdbcType="INTEGER" property="ip"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="consumed_time" jdbcType="INTEGER" property="consumedTime"/>
+        <result column="response_code" jdbcType="VARCHAR" property="responseCode"/>
+        <result column="response_msg" jdbcType="VARCHAR" property="responseMsg"/>
+        <result column="response_data" jdbcType="LONGVARCHAR" property="responseData"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="is_deleted" jdbcType="BOOLEAN" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, request_id, user_id, uri, `method`, ua, path_param, body_param, ip, begin_time,
+        end_time, consumed_time, response_code, response_msg, response_data, create_by, create_time,
+        update_by, update_time, version, is_deleted
+    </sql>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into log_request
+        (id, request_id, user_id, uri, `method`, ua, path_param, body_param, ip, begin_time,
+        end_time, consumed_time, response_code, response_msg, response_data, create_by,
+        create_time, update_by, update_time, version, is_deleted)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.requestId,jdbcType=VARCHAR}, #{item.userId,jdbcType=BIGINT},
+            #{item.uri,jdbcType=VARCHAR}, #{item.method,jdbcType=VARCHAR}, #{item.ua,jdbcType=LONGVARCHAR},
+            #{item.pathParam,jdbcType=LONGVARCHAR}, #{item.bodyParam,jdbcType=LONGVARCHAR},
+            #{item.ip,jdbcType=INTEGER}, #{item.beginTime,jdbcType=TIMESTAMP}, #{item.endTime,jdbcType=TIMESTAMP},
+            #{item.consumedTime,jdbcType=INTEGER}, #{item.responseCode,jdbcType=VARCHAR},
+            #{item.responseMsg,jdbcType=VARCHAR},
+            #{item.responseData,jdbcType=LONGVARCHAR}, #{item.createBy,jdbcType=BIGINT},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER},
+            #{item.isDeleted,jdbcType=BOOLEAN})
+        </foreach>
+    </insert>
 </mapper>

@@ -9,7 +9,6 @@ import com.aliyun.oss.model.PolicyConditions;
 import com.zjnbit.bbs.api.model.conf.AliyunConf;
 import com.zjnbit.bbs.api.model.dto.BaseAliyunOssDto;
 import com.zjnbit.bbs.api.model.vo.BaseOssUploadPolicyVo;
-import com.zjnbit.framework.web.constant.AppConst;
 import lombok.SneakyThrows;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -31,6 +30,30 @@ public class AliyunOssTemplate {
     public AliyunOssTemplate(OSSClient ossClient, AliyunConf aliyunProperties) {
         this.client = ossClient;
         this.aliyunProperties = aliyunProperties;
+    }
+
+    /**
+     * 验证RSA
+     *
+     * @param content
+     * @param sign
+     * @param publicKey
+     * @return
+     */
+    private static boolean doCheck(String content, byte[] sign, String publicKey) {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            byte[] encodedKey = BinaryUtil.fromBase64String(publicKey);
+            PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
+            java.security.Signature signature = java.security.Signature.getInstance("MD5withRSA");
+            signature.initVerify(pubKey);
+            signature.update(content.getBytes());
+            boolean bverify = signature.verify(sign);
+            return bverify;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -72,15 +95,15 @@ public class AliyunOssTemplate {
     }
 
     @SneakyThrows
-    public BaseAliyunOssDto callback(HttpServletRequest request){
+    public BaseAliyunOssDto callback(HttpServletRequest request) {
         BaseAliyunOssDto dto = null;
-        String ossCallbackBody = getPostBody(request.getInputStream(),Integer.parseInt(request.getHeader("content-length")));
+        String ossCallbackBody = getPostBody(request.getInputStream(), Integer.parseInt(request.getHeader("content-length")));
         boolean ret = verifyOSSCallbackRequest(request, ossCallbackBody);
         if (ret) {
             dto = new BaseAliyunOssDto();
             dto.setAttachPath(request.getParameter("filename"));
-            dto.setOssUrl("https://"+aliyunProperties.getOss().getBucketUrl()+"/" + request.getParameter("filename"));
-            dto.setCdnUrl("https://"+aliyunProperties.getOss().getCdnUrl()+"/" + request.getParameter("filename"));
+            dto.setOssUrl("https://" + aliyunProperties.getOss().getBucketUrl() + "/" + request.getParameter("filename"));
+            dto.setCdnUrl("https://" + aliyunProperties.getOss().getCdnUrl() + "/" + request.getParameter("filename"));
             dto.setMimeType(request.getParameter("mimeType"));
             return dto;
         }
@@ -114,7 +137,6 @@ public class AliyunOssTemplate {
         return "";
     }
 
-
     /**
      * 验证上传回调的Request
      *
@@ -123,7 +145,7 @@ public class AliyunOssTemplate {
      * @return
      */
     @SneakyThrows
-    private boolean verifyOSSCallbackRequest(HttpServletRequest request, String ossCallbackBody){
+    private boolean verifyOSSCallbackRequest(HttpServletRequest request, String ossCallbackBody) {
         boolean ret = false;
         String autorizationInput = new String(request.getHeader("Authorization"));
         String pubKeyInput = request.getHeader("x-oss-pub-key-url");
@@ -163,14 +185,13 @@ public class AliyunOssTemplate {
         return key.toString();
     }
 
-
     /**
      * 获取public key
      *
      * @param url
      * @return
      */
-    @SuppressWarnings({ "finally" })
+    @SuppressWarnings({"finally"})
     private String executeGet(String url) {
         BufferedReader in = null;
         String content = null;
@@ -203,30 +224,6 @@ public class AliyunOssTemplate {
             }
             return content;
         }
-    }
-
-    /**
-     * 验证RSA
-     *
-     * @param content
-     * @param sign
-     * @param publicKey
-     * @return
-     */
-    private static boolean doCheck(String content, byte[] sign, String publicKey) {
-        try {
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            byte[] encodedKey = BinaryUtil.fromBase64String(publicKey);
-            PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
-            java.security.Signature signature = java.security.Signature.getInstance("MD5withRSA");
-            signature.initVerify(pubKey);
-            signature.update(content.getBytes());
-            boolean bverify = signature.verify(sign);
-            return bverify;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
 }
