@@ -1,7 +1,5 @@
 package com.zjnbit.bbs.api.framework.config;
 
-import com.zjnbit.bbs.api.model.conf.AliyunConf;
-import com.zjnbit.bbs.api.model.conf.AuthConf;
 import com.zjnbit.bbs.api.model.conf.BbsConf;
 import com.zjnbit.bbs.api.service.BaseConfService;
 import lombok.extern.slf4j.Slf4j;

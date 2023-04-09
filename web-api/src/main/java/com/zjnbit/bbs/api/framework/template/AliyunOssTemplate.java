@@ -8,7 +8,6 @@ import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
 import com.zjnbit.bbs.api.framework.prop.AliyunOssProperties;
 import com.zjnbit.bbs.api.framework.prop.AliyunSecurityProperties;
-import com.zjnbit.bbs.api.model.conf.AliyunConf;
 import com.zjnbit.bbs.api.model.dto.BaseAliyunOssDto;
 import com.zjnbit.bbs.api.model.vo.BaseOssUploadPolicyVo;
 import com.zjnbit.framework.web.constant.StringPool;
