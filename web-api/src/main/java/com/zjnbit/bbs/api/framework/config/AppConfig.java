@@ -17,26 +17,6 @@ public class AppConfig {
     @Autowired
     BaseConfService baseConfService;
 
-    @PostConstruct
-    public void initAliyunConf() {
-        baseConfService.initAliyunConf();
-        log.info("加载Aliyun配置完成");
-    }
-
-    public AliyunConf getAliyunConf() {
-        return baseConfService.getAliyunConf();
-    }
-
-    @PostConstruct
-    public void initAuthConf() {
-        baseConfService.initAuthConf();
-        System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,SSLv3");
-        log.info("加载权限配置完成");
-    }
-
-    public AuthConf getAuthConf() {
-        return baseConfService.getAuthConf();
-    }
 
     @PostConstruct
     public void initBbsConf() {

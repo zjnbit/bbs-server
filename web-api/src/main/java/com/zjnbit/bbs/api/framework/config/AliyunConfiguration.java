@@ -4,25 +4,34 @@ import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.auth.CredentialsProvider;
 import com.aliyun.oss.common.auth.DefaultCredentialProvider;
+import com.zjnbit.bbs.api.framework.prop.AliyunOssProperties;
+import com.zjnbit.bbs.api.framework.prop.AliyunSecurityProperties;
 import com.zjnbit.bbs.api.framework.template.AliyunOssTemplate;
-import com.zjnbit.bbs.api.model.conf.AliyunConf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AliyunConfig {
+@EnableConfigurationProperties({AliyunSecurityProperties.class, AliyunOssProperties.class})
+public class AliyunConfiguration {
 
     @Autowired
-    AppConfig appConfig;
+    AliyunSecurityProperties securityProperties;
+    @Autowired
+    AliyunOssProperties ossProperties;
+
+    public AliyunConfiguration(AliyunSecurityProperties securityProperties, AliyunOssProperties ossProperties) {
+        this.securityProperties = securityProperties;
+        this.ossProperties = ossProperties;
+    }
 
     @Bean
     @ConditionalOnBean({AppConfig.class, RedisConfig.class})
     @ConditionalOnMissingBean(OSSClient.class)
     public OSSClient ossClient() {
-        AliyunConf dbConf = appConfig.getAliyunConf();
         // 创建ClientConfiguration。ClientConfiguration是OSSClient的配置类，可配置代理、连接超时、最大连接数等参数。
         ClientConfiguration conf = new ClientConfiguration();
         // 设置OSSClient允许打开的最大HTTP连接数，默认为1024个。
@@ -37,15 +46,14 @@ public class AliyunConfig {
         conf.setIdleConnectionTime(60000);
         // 设置失败请求重试次数，默认为3次。
         conf.setMaxErrorRetry(5);
-        CredentialsProvider credentialsProvider = new DefaultCredentialProvider(dbConf.getSecurity().getAccessKey(), dbConf.getSecurity().getAccessKeySecret());
-        return new OSSClient(dbConf.getOss().getEndpoint(), credentialsProvider, conf);
+        CredentialsProvider credentialsProvider = new DefaultCredentialProvider(securityProperties.getAccessKeyId(), securityProperties.getAccessKeySecret());
+        return new OSSClient(ossProperties.getEndpoint(), credentialsProvider, conf);
     }
 
     @Bean
     @ConditionalOnBean({OSSClient.class})
     @ConditionalOnMissingBean(AliyunOssTemplate.class)
     public AliyunOssTemplate aliyunOssTemplate(OSSClient ossClient) {
-        AliyunConf dbConf = appConfig.getAliyunConf();
-        return new AliyunOssTemplate(ossClient, dbConf);
+        return new AliyunOssTemplate(ossClient, securityProperties, ossProperties);
     }
 }

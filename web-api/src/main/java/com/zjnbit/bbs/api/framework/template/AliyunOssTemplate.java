@@ -6,9 +6,12 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
+import com.zjnbit.bbs.api.framework.prop.AliyunOssProperties;
+import com.zjnbit.bbs.api.framework.prop.AliyunSecurityProperties;
 import com.zjnbit.bbs.api.model.conf.AliyunConf;
 import com.zjnbit.bbs.api.model.dto.BaseAliyunOssDto;
 import com.zjnbit.bbs.api.model.vo.BaseOssUploadPolicyVo;
+import com.zjnbit.framework.web.constant.StringPool;
 import lombok.SneakyThrows;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -25,11 +28,13 @@ import java.util.Date;
 public class AliyunOssTemplate {
 
     private final OSSClient client;
-    private final AliyunConf aliyunProperties;
+    private final AliyunSecurityProperties securityProperties;
+    private final AliyunOssProperties ossProperties;
 
-    public AliyunOssTemplate(OSSClient ossClient, AliyunConf aliyunProperties) {
+    public AliyunOssTemplate(OSSClient ossClient, AliyunSecurityProperties aliyunSecurityProperties,AliyunOssProperties aliyunOssProperties) {
         this.client = ossClient;
-        this.aliyunProperties = aliyunProperties;
+        this.securityProperties = aliyunSecurityProperties;
+        this.ossProperties = aliyunOssProperties;
     }
 
     /**
@@ -75,14 +80,14 @@ public class AliyunOssTemplate {
             byte[] binaryData = postPolicy.getBytes("utf-8");
             String encodedPolicy = BinaryUtil.toBase64String(binaryData);
             String postSignature = client.calculatePostSignature(postPolicy);
-            vo.setAccessid(aliyunProperties.getSecurity().getAccessKey());
+            vo.setAccessid(securityProperties.getAccessKeyId());
             vo.setPolicy(encodedPolicy);
             vo.setSignature(postSignature);
             vo.setDir(dir);
-            vo.setHost(aliyunProperties.getOss().getBucketUrl());
+            vo.setHost(ossProperties.getBucket()+ StringPool.DOT+ossProperties.getEndpoint());
             vo.setExpire(String.valueOf(expireEndTime / 1000));
             JSONObject jasonCallback = new JSONObject();
-            jasonCallback.put("callbackUrl", aliyunProperties.getOss().getCallbackUrl());
+            jasonCallback.put("callbackUrl", ossProperties.getCallbackUrl());
             jasonCallback.put("callbackBody",
                     "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}");
             jasonCallback.put("callbackBodyType", "application/x-www-form-urlencoded");
@@ -102,8 +107,8 @@ public class AliyunOssTemplate {
         if (ret) {
             dto = new BaseAliyunOssDto();
             dto.setAttachPath(request.getParameter("filename"));
-            dto.setOssUrl("https://" + aliyunProperties.getOss().getBucketUrl() + "/" + request.getParameter("filename"));
-            dto.setCdnUrl("https://" + aliyunProperties.getOss().getCdnUrl() + "/" + request.getParameter("filename"));
+            dto.setOssUrl("https://" + ossProperties.getBucket()+ StringPool.DOT+ossProperties.getEndpoint() + "/" + request.getParameter("filename"));
+            dto.setCdnUrl("https://" + ossProperties.getCdnUrl() + "/" + request.getParameter("filename"));
             dto.setMimeType(request.getParameter("mimeType"));
             return dto;
         }

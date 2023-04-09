@@ -5,13 +5,6 @@ import com.zjnbit.bbs.api.model.conf.AuthConf;
 import com.zjnbit.bbs.api.model.conf.BbsConf;
 
 public interface BaseConfService {
-    AliyunConf initAliyunConf();
-
-    AliyunConf getAliyunConf();
-
-    AuthConf initAuthConf();
-
-    AuthConf getAuthConf();
 
     BbsConf initBbsConf();
 
