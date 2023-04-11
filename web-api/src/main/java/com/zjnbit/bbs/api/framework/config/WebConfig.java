@@ -20,14 +20,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping(AppConst.CROS_PAHT_PATTERN)
-                .allowCredentials(true)
                 .allowedOriginPatterns("*")
-                .allowedMethods(AppConst.CROSS_ALLOWED_METHODS)
+                .allowedMethods("*")
                 .allowedHeaders("*")
-                .exposedHeaders("*");
+                .allowCredentials(true);
         StringBuilder sb = new StringBuilder("加载跨域设置,Path:").append(AppConst.CROS_PAHT_PATTERN).append("Method:");
         Arrays.stream(AppConst.CROSS_ALLOWED_METHODS).forEach(sb::append);
         log.info(sb.toString());
+        WebMvcConfigurer.super.addCorsMappings(registry);
     }
 
     // 注册Sa-Token的注解拦截器，打开注解式鉴权功能

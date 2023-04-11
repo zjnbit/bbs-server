@@ -28,8 +28,6 @@ bbs:
       endpoint: oss-cn-hongkong.aliyuncs.com
       cdn-url: cdn.bbs.com
       callback-url: https://bbs.simple.com/api/callback/oss/aliyun
-    cache:
-      address
   mail:
     host: smtpdm.bbs.com
     port: 465

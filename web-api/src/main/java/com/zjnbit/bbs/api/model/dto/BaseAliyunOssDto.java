@@ -8,4 +8,5 @@ public class BaseAliyunOssDto {
     private String ossUrl;
     private String cdnUrl;
     private String mimeType;
+    private Long size;
 }

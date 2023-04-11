@@ -22,7 +22,7 @@
 - hu-tool
 
 ## 部署说明
-
+docker build -t bbs-server:0.0.1 -f Dockerfile
 - 待完善
 
 - `doc/db/` 目录下有数据库脚本，可直接导入 MySQL 中
