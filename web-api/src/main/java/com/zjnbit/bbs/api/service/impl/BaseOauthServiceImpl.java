@@ -5,9 +5,9 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.BCrypt;
-import cn.hutool.extra.mail.MailUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.zjnbit.bbs.api.framework.constant.CacheKeyConst;
+import com.zjnbit.bbs.api.framework.template.EmailTemplate;
 import com.zjnbit.bbs.api.mapper.UserBaseMapper;
 import com.zjnbit.bbs.api.model.constant.BaseOauthSigninTypeEnum;
 import com.zjnbit.bbs.api.model.entity.UserBaseEntity;
@@ -32,6 +32,8 @@ public class BaseOauthServiceImpl implements BaseOauthService {
     UserBaseMapper userBaseMapper;
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    EmailTemplate emailTemplate;
 
     @Override
     public Boolean signupCode(BaseOauthSignupCodeParam data) {
@@ -50,7 +52,7 @@ public class BaseOauthServiceImpl implements BaseOauthService {
             String code = RandomUtil.randomNumbers(6);
             redisTemplate.opsForValue().set(CacheKeyConst.OAUTH_SIGNUP_EMAIL_CODE + data.getTarget(), code, 30, TimeUnit.MINUTES);
             redisTemplate.opsForValue().set(CacheKeyConst.OAUTH_SIGNUP_EMAIL_TIMER + data.getTarget(), null, 1, TimeUnit.MINUTES);
-            MailUtil.send(data.getTarget(), "注册验证码", "您的验证码为：" + code, false);
+            emailTemplate.sendSimpleMail(data.getTarget(), "注册验证码", "您的验证码为：" + code);
         } else if ("phone".equals(data.getType())) {
 
         } else {
