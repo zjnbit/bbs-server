@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.Map;
 
 @Slf4j
 public class AliyunOssTemplate {
@@ -48,11 +47,11 @@ public class AliyunOssTemplate {
             policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, 10L * 1024 * 1024);
             String dir = genUploadDir();
             policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);
-            policyConds.addConditionItem(MatchMode.Exact,PolicyConditions.COND_CONTENT_TYPE,"image/jpg");
-            policyConds.addConditionItem(MatchMode.Exact,PolicyConditions.COND_CONTENT_TYPE,"image/jpeg");
-            policyConds.addConditionItem(MatchMode.Exact,PolicyConditions.COND_CONTENT_TYPE,"image/png");
-            policyConds.addConditionItem(MatchMode.Exact,PolicyConditions.COND_CONTENT_TYPE,"image/gif");
-            policyConds.addConditionItem(MatchMode.Exact,PolicyConditions.COND_CONTENT_TYPE,"application/x-bmpg");
+            policyConds.addConditionItem(MatchMode.Exact, PolicyConditions.COND_CONTENT_TYPE, "image/jpg");
+            policyConds.addConditionItem(MatchMode.Exact, PolicyConditions.COND_CONTENT_TYPE, "image/jpeg");
+            policyConds.addConditionItem(MatchMode.Exact, PolicyConditions.COND_CONTENT_TYPE, "image/png");
+            policyConds.addConditionItem(MatchMode.Exact, PolicyConditions.COND_CONTENT_TYPE, "image/gif");
+            policyConds.addConditionItem(MatchMode.Exact, PolicyConditions.COND_CONTENT_TYPE, "application/x-bmpg");
             String postPolicy = client.generatePostPolicy(expiration, policyConds);
             byte[] binaryData = postPolicy.getBytes("utf-8");
             String encodedPolicy = BinaryUtil.toBase64String(binaryData);
@@ -65,7 +64,7 @@ public class AliyunOssTemplate {
             vo.setExpire(String.valueOf(expireEndTime / 1000));
             JSONObject jasonCallback = new JSONObject();
             jasonCallback.put("callbackUrl", ossProperties.getCallbackUrl());
-            jasonCallback.put("callbackBody","{\"filename\":${object},\"mimeType\":${mimeType},\"size\":${size}}");
+            jasonCallback.put("callbackBody", "{\"filename\":${object},\"mimeType\":${mimeType},\"size\":${size}}");
             jasonCallback.put("callbackBodyType", "application/json");
             String base64CallbackBody = BinaryUtil.toBase64String(jasonCallback.toString().getBytes());
             vo.setCallback(base64CallbackBody);
@@ -77,11 +76,11 @@ public class AliyunOssTemplate {
 
     @SneakyThrows
     public BaseAliyunOssDto callback(BaseAliyunOssCallbackDto data) {
-        log.info("callback:"+ JSONUtil.toJsonStr(data));
+        log.info("callback:" + JSONUtil.toJsonStr(data));
         BaseAliyunOssDto dto = new BaseAliyunOssDto();
         dto.setAttachPath(data.getFilename());
         dto.setOssUrl("https://" + ossProperties.getBucket() + StringPool.DOT + ossProperties.getEndpoint() + "/" + data.getFilename());
-        dto.setCdnUrl(ossProperties.getCdnUrl() + "/" +data.getFilename());
+        dto.setCdnUrl(ossProperties.getCdnUrl() + "/" + data.getFilename());
         dto.setMimeType(data.getMimeType());
         dto.setSize(data.getSize());
         return dto;

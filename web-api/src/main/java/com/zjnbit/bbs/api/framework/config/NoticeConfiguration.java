@@ -8,21 +8,17 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author 陈俊羽
- * @emp chenjunyu1 211100011
- * @date 2023/4/14 08:45
- * @Description
- **/
+
 @Configuration
 @EnableConfigurationProperties({MailProperties.class})
 public class NoticeConfiguration {
 
-    private  MailProperties emailConf;
+    private MailProperties emailConf;
 
     public NoticeConfiguration(MailProperties emailConf) {
         this.emailConf = emailConf;
     }
+
     @Bean
     @ConditionalOnMissingBean(EmailTemplate.class)
     public EmailTemplate emailTemplate() {
@@ -34,6 +30,6 @@ public class NoticeConfiguration {
         account.setUser(emailConf.getUser());
         account.setPass(emailConf.getPass());
         account.setSslEnable(emailConf.getSslEnable());
-        return new EmailTemplate(account) ;
+        return new EmailTemplate(account);
     }
 }

@@ -8,8 +8,6 @@ import com.zjnbit.bbs.api.model.dto.BaseAliyunOssDto;
 import com.zjnbit.bbs.api.model.entity.BbsAttachEntity;
 import com.zjnbit.bbs.api.model.vo.BbsAttachVo;
 import com.zjnbit.bbs.api.service.BaseCallbackService;
-import com.zjnbit.framework.web.exception.RequestError;
-import com.zjnbit.framework.web.exception.RequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

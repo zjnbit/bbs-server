@@ -8,7 +8,7 @@
 
 - [ ] 修改邮件发送(现在用的阿里云的服务，毕竟收费，虽然不贵)
 - [ ] 删除原先单点登录的代码，改用 sa-token，后续如果接入第三方登录，用JustAuth
-- 
+-
 
 ## 技术栈
 
@@ -22,7 +22,9 @@
 - hu-tool
 
 ## 部署说明
+
 docker build -t bbs-server:0.0.1 -f Dockerfile
+
 - 待完善
 
 - `doc/db/` 目录下有数据库脚本，可直接导入 MySQL 中

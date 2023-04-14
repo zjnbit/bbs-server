@@ -5,12 +5,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * @author 陈俊羽
- * @emp chenjunyu1 211100011
- * @date 2023/4/11 16:22
- * @Description
- **/
 @WebFilter(urlPatterns = "/*", filterName = "requestReplaced")
 public class HttpServletRequestReplacedFilter implements Filter {
     @Override

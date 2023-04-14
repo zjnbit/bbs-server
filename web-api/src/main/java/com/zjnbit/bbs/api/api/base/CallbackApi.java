@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 @RestController
 public class CallbackApi extends BaseApi<BaseCallbackService> {
@@ -23,7 +22,7 @@ public class CallbackApi extends BaseApi<BaseCallbackService> {
      */
     @RequestMapping(value = BaseCallbackRouter.OSS_ALIYUN)
     public Result<BbsAttachVo> ossAliyun(@RequestBody BaseAliyunOssCallbackDto param, HttpServletResponse response) {
-        return success(baseService.ossAliyun(param,response));
+        return success(baseService.ossAliyun(param, response));
     }
 
 }

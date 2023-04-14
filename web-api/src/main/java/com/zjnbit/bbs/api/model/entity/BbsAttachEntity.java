@@ -1,20 +1,10 @@
 package com.zjnbit.bbs.api.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zjnbit.framework.db.model.BaseEntity;
-import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-/**
-* @author 陈俊羽
-* @emp chenjunyu1 211100011
-* @date 2023/4/11 16:50
-* @Description ${description}
-**/
 
 /**
  * 论坛附件表
