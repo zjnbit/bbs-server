@@ -10,6 +10,10 @@ public class CacheKeyConst {
      * 角色权限 roleCode:[permissionCode]
      */
     public static final String SECURITY_ROLE_PERMISSION = "security:role-permission:";
+
+    public static final String SECURITY_ROLE_INFO="security:role-info:";
+
+
     public static final String BBS_NODE_ALL = "cache:bbs:node:all";
     public static final String BBS_NODE = "cache:bbs:node:";
 

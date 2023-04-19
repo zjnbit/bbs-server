@@ -11,7 +11,7 @@ import com.zjnbit.bbs.api.model.entity.BbsNodeGroupEntity;
 import com.zjnbit.bbs.api.model.param.BbsNodeGroupParam;
 import com.zjnbit.bbs.api.model.param.BbsNodeParam;
 import com.zjnbit.bbs.api.model.vo.BbsNodeGroupVo;
-import com.zjnbit.bbs.api.model.vo.BbsNodeVo;
+import com.zjnbit.bbs.api.model.vo.BbsNodeVoOld;
 import com.zjnbit.bbs.api.service.ManageNodeService;
 import com.zjnbit.framework.web.exception.RequestError;
 import com.zjnbit.framework.web.exception.RequestException;
@@ -48,16 +48,16 @@ public class ManageNodeServiceImpl implements ManageNodeService {
         }).collect(Collectors.toList());
         //获取NodeGroup下的Node集合
         List<BbsNodeEntity> nodeEntityList = bbsNodeMapper.selectList(new LambdaQueryWrapper<BbsNodeEntity>().in(BbsNodeEntity::getNodeGroupId, result.stream().map(BbsNodeGroupVo::getId).collect(Collectors.toList())).eq(BbsNodeEntity::getIsShow, true).orderByAsc(BbsNodeEntity::getSort));
-        List<BbsNodeVo> parentNodeList = nodeEntityList.stream().filter(parentNodeEntity -> parentNodeEntity.getParentId().equals(0L)).map(parentNodeEntity -> {
-            BbsNodeVo bbsNodeVo = new BbsNodeVo();
-            BeanUtil.copyProperties(parentNodeEntity, bbsNodeVo);
-            return bbsNodeVo;
+        List<BbsNodeVoOld> parentNodeList = nodeEntityList.stream().filter(parentNodeEntity -> parentNodeEntity.getParentId().equals(0L)).map(parentNodeEntity -> {
+            BbsNodeVoOld bbsNodeVoOld = new BbsNodeVoOld();
+            BeanUtil.copyProperties(parentNodeEntity, bbsNodeVoOld);
+            return bbsNodeVoOld;
         }).collect(Collectors.toList());
-        for (BbsNodeVo parentNode : parentNodeList) {
-            List<BbsNodeVo> childNodeList = new ArrayList<>();
+        for (BbsNodeVoOld parentNode : parentNodeList) {
+            List<BbsNodeVoOld> childNodeList = new ArrayList<>();
             for (BbsNodeEntity nodeEntity : nodeEntityList) {
                 if (parentNode.getId().equals(nodeEntity.getParentId())) {
-                    BbsNodeVo childNode = new BbsNodeVo();
+                    BbsNodeVoOld childNode = new BbsNodeVoOld();
                     BeanUtil.copyProperties(nodeEntity, childNode);
                     childNodeList.add(childNode);
                 }
@@ -65,8 +65,8 @@ public class ManageNodeServiceImpl implements ManageNodeService {
             parentNode.setChildNodeList(childNodeList);
         }
         for (BbsNodeGroupVo groupVo : result) {
-            List<BbsNodeVo> groupNodeList = new ArrayList<>();
-            for (BbsNodeVo parentNode : parentNodeList) {
+            List<BbsNodeVoOld> groupNodeList = new ArrayList<>();
+            for (BbsNodeVoOld parentNode : parentNodeList) {
                 if (groupVo.getId().equals(parentNode.getNodeGroupId())) {
                     groupNodeList.add(parentNode);
                 }

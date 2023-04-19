@@ -10,6 +10,7 @@ import com.zjnbit.bbs.api.model.entity.BbsNodeEntity;
 import com.zjnbit.bbs.api.model.entity.BbsNodeGroupEntity;
 import com.zjnbit.bbs.api.model.vo.BbsNodeGroupVo;
 import com.zjnbit.bbs.api.model.vo.BbsNodeVo;
+import com.zjnbit.bbs.api.model.vo.BbsNodeVoOld;
 import com.zjnbit.bbs.api.service.BbsNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -29,7 +30,18 @@ public class BbsNodeServiceImpl implements BbsNodeService {
     RedisTemplate redisTemplate;
 
     @Override
-    public List<BbsNodeGroupVo> listAllPublicNodes() {
+    public List<BbsNodeVo> listNodesByUserId(Long userId) {
+        //todo 获取用户权限，根据权限选择是否展示所有，暂时不做
+        //获取用户角色
+
+//        if (redisTemplate.hasKey(CacheKeyConst.BBS_NODE_ALL)) {
+//            List<BbsNodeVo> result=
+//        }
+        return null;
+    }
+
+    @Override
+    public List<BbsNodeGroupVo> listAllPublicNodesOld() {
         if (redisTemplate.hasKey(CacheKeyConst.BBS_NODE_ALL)) {
             List<BbsNodeGroupVo> result = (List<BbsNodeGroupVo>) redisTemplate.opsForValue().get(CacheKeyConst.BBS_NODE_ALL);
             return result;
@@ -46,16 +58,16 @@ public class BbsNodeServiceImpl implements BbsNodeService {
         }).collect(Collectors.toList());
         //获取NodeGroup下的Node集合
         List<BbsNodeEntity> nodeEntityList = bbsNodeMapper.selectList(new LambdaQueryWrapper<BbsNodeEntity>().in(BbsNodeEntity::getNodeGroupId, result.stream().map(BbsNodeGroupVo::getId).collect(Collectors.toList())).eq(BbsNodeEntity::getIsShow, true).orderByAsc(BbsNodeEntity::getSort));
-        List<BbsNodeVo> parentNodeList = nodeEntityList.stream().filter(parentNodeEntity -> parentNodeEntity.getParentId().equals(0L)).map(parentNodeEntity -> {
-            BbsNodeVo bbsNodeVo = new BbsNodeVo();
-            BeanUtil.copyProperties(parentNodeEntity, bbsNodeVo);
-            return bbsNodeVo;
+        List<BbsNodeVoOld> parentNodeList = nodeEntityList.stream().filter(parentNodeEntity -> parentNodeEntity.getParentId().equals(0L)).map(parentNodeEntity -> {
+            BbsNodeVoOld bbsNodeVoOld = new BbsNodeVoOld();
+            BeanUtil.copyProperties(parentNodeEntity, bbsNodeVoOld);
+            return bbsNodeVoOld;
         }).collect(Collectors.toList());
-        for (BbsNodeVo parentNode : parentNodeList) {
-            List<BbsNodeVo> childNodeList = new ArrayList<>();
+        for (BbsNodeVoOld parentNode : parentNodeList) {
+            List<BbsNodeVoOld> childNodeList = new ArrayList<>();
             for (BbsNodeEntity nodeEntity : nodeEntityList) {
                 if (parentNode.getId().equals(nodeEntity.getParentId())) {
-                    BbsNodeVo childNode = new BbsNodeVo();
+                    BbsNodeVoOld childNode = new BbsNodeVoOld();
                     BeanUtil.copyProperties(nodeEntity, childNode);
                     childNodeList.add(childNode);
                 }
@@ -63,8 +75,8 @@ public class BbsNodeServiceImpl implements BbsNodeService {
             parentNode.setChildNodeList(childNodeList);
         }
         for (BbsNodeGroupVo groupVo : result) {
-            List<BbsNodeVo> groupNodeList = new ArrayList<>();
-            for (BbsNodeVo parentNode : parentNodeList) {
+            List<BbsNodeVoOld> groupNodeList = new ArrayList<>();
+            for (BbsNodeVoOld parentNode : parentNodeList) {
                 if (groupVo.getId().equals(parentNode.getNodeGroupId())) {
                     groupNodeList.add(parentNode);
                 }

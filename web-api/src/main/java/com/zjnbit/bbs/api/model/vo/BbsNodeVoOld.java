@@ -6,22 +6,19 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * @author 陈俊羽
- * @emp chenjunyu1 211100011
- * @date 2023/4/18 15:39
- * @Description
- **/
 @Data
-public class BbsNodeVo {
+public class BbsNodeVoOld {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long parnetId;
     private String nodeCode;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long nodeGroupId;
     private String nodeName;
     private String nodeIcon;
     private Boolean isPublish;
     private Integer sort;
     private List<BbsNodeVoOld> childNodeList;
+
 }

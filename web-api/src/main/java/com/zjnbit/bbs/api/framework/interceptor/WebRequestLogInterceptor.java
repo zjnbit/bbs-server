@@ -30,13 +30,17 @@ public class WebRequestLogInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         request.setAttribute(AppConst.REQUST_LOG_START_TIME, System.currentTimeMillis());
         request.setAttribute(AppConst.REQUST_ID, IdUtil.fastUUID());
-        MyHttpServletRequestWrapper myWrapper = new MyHttpServletRequestWrapper(request);
-        String jsonBody = GetRequestJsonUtil.getRequestJsonString(myWrapper);
-        if (JSONUtil.isTypeJSON(jsonBody)) {
-            JSONObject jsonObject = JSONUtil.parseObj(jsonBody);
-            jsonBody = JSONUtil.toJsonStr(jsonObject);
+        if (!request.getMethod().equals("PUT")) {
+            MyHttpServletRequestWrapper myWrapper = new MyHttpServletRequestWrapper(request);
+            String jsonBody = GetRequestJsonUtil.getRequestJsonString(myWrapper);
+            if (JSONUtil.isTypeJSON(jsonBody)) {
+                JSONObject jsonObject = JSONUtil.parseObj(jsonBody);
+                jsonBody = JSONUtil.toJsonStr(jsonObject);
+            }
+            request.setAttribute(AppConst.REQUEST_BODY, jsonBody);
+        } else {
+            request.setAttribute(AppConst.REQUEST_BODY, "");
         }
-        request.setAttribute(AppConst.REQUEST_BODY, jsonBody);
         return true;
     }
 

@@ -20,7 +20,7 @@ public class NodeApi extends BaseApi<BbsNodeService> {
      **/
     @GetMapping(value = BbsNodeRouter.ALL)
     public Result<List<BbsNodeGroupVo>> all() {
-        return success(baseService.listAllPublicNodes());
+        return success(baseService.listAllPublicNodesOld());
     }
 
 

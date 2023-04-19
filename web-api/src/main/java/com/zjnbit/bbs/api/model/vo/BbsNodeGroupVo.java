@@ -13,5 +13,5 @@ public class BbsNodeGroupVo {
     private String groupName;
     private String remark;
     private Integer sort;
-    private List<BbsNodeVo> nodeList;
+    private List<BbsNodeVoOld> nodeList;
 }

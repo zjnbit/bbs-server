@@ -15,7 +15,7 @@ public class HttpServletRequestReplacedFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         ServletRequest requestWrapper = null;
-        if (request instanceof HttpServletRequest) {
+        if (request instanceof HttpServletRequest&&!((HttpServletRequest) request).getMethod().equals("PUT")) {
             requestWrapper = new MyHttpServletRequestWrapper((HttpServletRequest) request);
         }
         if (requestWrapper == null) {

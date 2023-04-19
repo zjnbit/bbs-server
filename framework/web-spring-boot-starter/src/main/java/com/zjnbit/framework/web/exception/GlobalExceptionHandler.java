@@ -26,4 +26,13 @@ public class GlobalExceptionHandler {
         return new Result(RequestError.B0500.getErrCode(), RequestError.B0500.getErrMsg(), e.getMessage());
     }
 
+    @ExceptionHandler({NullPointerException.class})
+    @ResponseStatus(HttpStatus.OK)
+    public Result nullPointerException(NullPointerException e) {
+        log.error(e.getMessage(), e.getStackTrace());
+        log.error(e.getMessage(), e.fillInStackTrace());
+        log.error(e.getMessage(), e);
+        return new Result(RequestError.B0500.getErrCode(), RequestError.B0500.getErrMsg(), e.getMessage());
+    }
+
 }
