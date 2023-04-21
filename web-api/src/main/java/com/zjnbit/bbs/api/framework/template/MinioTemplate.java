@@ -2,6 +2,8 @@ package com.zjnbit.bbs.api.framework.template;
 
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import io.minio.StatObjectArgs;
+import io.minio.StatObjectResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -31,6 +33,18 @@ public class MinioTemplate {
             return false;
         }
         return true;
+    }
+
+    public StatObjectResponse getObjectInfo(String filePat){
+        try {
+            StatObjectResponse objectStat =
+                    minioClient.statObject(
+                            StatObjectArgs.builder().bucket(bucket).object(filePat).build());
+            return objectStat;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

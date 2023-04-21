@@ -107,7 +107,7 @@
         </repository>
         <repository>
             <id>chenjy-open</id>
-            <url>https://nexus.chenjy.cn/repository/maven-public/</url>
+            <url>https://nexus.zjnbit.com/repository/maven-public/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>

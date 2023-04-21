@@ -87,7 +87,7 @@
         </repository>
         <repository>
             <id>chenjy-open</id>
-            <url>https://nexus.chenjy.cn/repository/maven-public/</url>
+            <url>https://nexus.zjnbit.com/repository/maven-public/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -108,12 +108,12 @@
         <repository>
             <id>chenjy-releases</id>
             <name>Nexus Release Repository</name>
-            <url>https://nexus.chenjy.cn/repository/maven-releases/</url>
+            <url>https://nexus.zjnbit.com/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>chenjy-snapshots</id>
             <name>Nexus Snapshot Repository</name>
-            <url>https://nexus.chenjy.cn/repository/maven-snapshots/</url>
+            <url>https://nexus.zjnbit.com/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
