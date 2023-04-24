@@ -2,6 +2,7 @@ package com.zjnbit.bbs.api.framework.interceptor;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.lang.Validator;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.IdUtil;
@@ -56,7 +57,10 @@ public class WebRequestLogInterceptor implements HandlerInterceptor {
         logEntity.setUa(CharSequenceUtil.isNotBlank(request.getHeader("User-Agent")) ? request.getHeader("User-Agent") : "");
         logEntity.setPathParam(request.getQueryString() != null ? request.getQueryString() : "");
         logEntity.setBodyParam(CharSequenceUtil.isNotBlank((CharSequence) request.getAttribute(AppConst.REQUEST_BODY)) ? request.getAttribute(AppConst.REQUEST_BODY).toString() : "");
-        logEntity.setIp(NetUtil.ipv4ToLong(IpUtils.getIpAddress(request)));
+        String ip = IpUtils.getIpAddress(request);
+        if (Validator.isIpv4(ip)) {
+            logEntity.setIp(NetUtil.ipv4ToLong(ip));
+        }
         logEntity.setBeginTime(LocalDateTimeUtil.of(startTime));
         logEntity.setEndTime(LocalDateTimeUtil.of(endTime));
         logEntity.setConsumedTime((int) (endTime - startTime));
@@ -72,7 +76,7 @@ public class WebRequestLogInterceptor implements HandlerInterceptor {
             logEntity.setResponseData("");
         }
         baseRabbitMqService.sendLogRequestMsg(JSON.toJSONString(logEntity));
-        log.info("api-访问日志记录，请求ID：" + logEntity.getRequestId() + "内容：" + JSON.toJSONString(logEntity));
+        log.info("api-访问日志记录，请求ID：" + logEntity.getRequestId() + "请求IP:" + ip + "内容：" + JSON.toJSONString(logEntity));
     }
 
 }
