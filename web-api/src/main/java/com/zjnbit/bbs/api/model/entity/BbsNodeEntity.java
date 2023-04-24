@@ -6,6 +6,16 @@ import com.zjnbit.framework.db.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * @author 陈俊羽
+ * @emp chenjunyu1 211100011
+ * @date 2023/4/24 23:02
+ * @Description ${description}
+ **/
+
+/**
+ * 论坛节点表
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "bbs_node")
@@ -23,12 +33,6 @@ public class BbsNodeEntity extends BaseEntity {
     private String nodeCode;
 
     /**
-     * 节点组ID
-     */
-    @TableField(value = "node_group_id")
-    private Long nodeGroupId;
-
-    /**
      * 节点名称
      */
     @TableField(value = "node_name")
@@ -39,6 +43,12 @@ public class BbsNodeEntity extends BaseEntity {
      */
     @TableField(value = "node_icon")
     private String nodeIcon;
+
+    /**
+     * 介绍
+     */
+    @TableField(value = "remark")
+    private String remark;
 
     /**
      * 是否展示(1开放，0不开放)

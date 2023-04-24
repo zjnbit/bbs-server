@@ -1,6 +1,6 @@
 package com.zjnbit.bbs.api.api.bbs;
 
-import com.zjnbit.bbs.api.model.vo.BbsNodeGroupVo;
+import com.zjnbit.bbs.api.model.vo.BbsNodeVo;
 import com.zjnbit.bbs.api.router.bbs.BbsNodeRouter;
 import com.zjnbit.bbs.api.service.BbsNodeService;
 import com.zjnbit.framework.web.api.BaseApi;
@@ -19,8 +19,8 @@ public class NodeApi extends BaseApi<BbsNodeService> {
      * @author 非羽Army
      **/
     @GetMapping(value = BbsNodeRouter.ALL)
-    public Result<List<BbsNodeGroupVo>> all() {
-        return success(baseService.listAllPublicNodesOld());
+    public Result<List<BbsNodeVo>> all() {
+        return success(baseService.listAllNodes());
     }
 
 

@@ -7,9 +7,9 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
         <result column="node_code" jdbcType="VARCHAR" property="nodeCode"/>
-        <result column="node_group_id" jdbcType="BIGINT" property="nodeGroupId"/>
         <result column="node_name" jdbcType="VARCHAR" property="nodeName"/>
         <result column="node_icon" jdbcType="VARCHAR" property="nodeIcon"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="is_show" jdbcType="BOOLEAN" property="isShow"/>
         <result column="is_publish" jdbcType="BOOLEAN" property="isPublish"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
@@ -22,7 +22,23 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        id, parent_id, node_code, node_group_id, node_name, node_icon, is_show, is_publish,
-        sort, create_user, create_time, update_user, update_time, version, is_deleted
+        id, parent_id, node_code, node_name, node_icon, remark, is_show, is_publish, sort,
+        create_user, create_time, update_user, update_time, version, is_deleted
     </sql>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into bbs_node
+        (id, parent_id, node_code, node_name, node_icon, remark, is_show, is_publish, sort,
+        create_user, create_time, update_user, update_time, version, is_deleted)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.parentId,jdbcType=BIGINT}, #{item.nodeCode,jdbcType=VARCHAR},
+            #{item.nodeName,jdbcType=VARCHAR}, #{item.nodeIcon,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR},
+            #{item.isShow,jdbcType=BOOLEAN}, #{item.isPublish,jdbcType=BOOLEAN}, #{item.sort,jdbcType=INTEGER},
+            #{item.createUser,jdbcType=BIGINT}, #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateUser,jdbcType=BIGINT},
+            #{item.updateTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER}, #{item.isDeleted,jdbcType=BOOLEAN}
+            )
+        </foreach>
+    </insert>
 </mapper>

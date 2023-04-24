@@ -17,11 +17,11 @@ public class BbsNodeVo {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parnetId;
+    private Long parentId;
     private String nodeCode;
     private String nodeName;
     private String nodeIcon;
     private Boolean isPublish;
     private Integer sort;
-    private List<BbsNodeVoOld> childNodeList;
+    private List<BbsNodeVo> childNodeList;
 }

@@ -1,8 +1,7 @@
 package com.zjnbit.bbs.api.service;
 
-import com.zjnbit.bbs.api.model.param.BbsNodeGroupParam;
 import com.zjnbit.bbs.api.model.param.BbsNodeParam;
-import com.zjnbit.bbs.api.model.vo.BbsNodeGroupVo;
+import com.zjnbit.bbs.api.model.vo.BbsNodeVo;
 
 import java.util.List;
 
@@ -13,28 +12,8 @@ public interface ManageNodeService {
      *
      * @author 非羽Army
      **/
-    List<BbsNodeGroupVo> listAllNodes();
+    List<BbsNodeVo> listAllNodes();
 
-    /**
-     * 添加节点分组
-     *
-     * @param data
-     */
-    void addNodeGroup(BbsNodeGroupParam data);
-
-    /**
-     * 修改节点分组
-     *
-     * @param data
-     */
-    void updateNodeGroup(BbsNodeGroupParam data);
-
-    /**
-     * 删除节点分组
-     *
-     * @param id
-     */
-    void remove(Long id);
 
     /**
      * 添加节点

@@ -1,8 +1,7 @@
 package com.zjnbit.bbs.api.api.admin;
 
-import com.zjnbit.bbs.api.model.param.BbsNodeGroupParam;
 import com.zjnbit.bbs.api.model.param.BbsNodeParam;
-import com.zjnbit.bbs.api.model.vo.BbsNodeGroupVo;
+import com.zjnbit.bbs.api.model.vo.BbsNodeVo;
 import com.zjnbit.bbs.api.router.manage.ManageNodeRouter;
 import com.zjnbit.bbs.api.service.ManageNodeService;
 import com.zjnbit.framework.web.api.BaseApi;
@@ -23,30 +22,8 @@ public class ManageNodeApi extends BaseApi<ManageNodeService> {
      * @author 非羽Army
      **/
     @GetMapping(value = ManageNodeRouter.ALL)
-    public Result<List<BbsNodeGroupVo>> all() {
+    public Result<List<BbsNodeVo>> all() {
         return success(baseService.listAllNodes());
-    }
-
-    /**
-     * 添加节点分组
-     *
-     * @author 非羽Army
-     **/
-    @PostMapping(value = ManageNodeRouter.GROUP_ADD)
-    public Result<String> groupAdd(@RequestBody BbsNodeGroupParam param) {
-        baseService.addNodeGroup(param);
-        return success();
-    }
-
-    /**
-     * 修改节点分组
-     *
-     * @author 非羽Army
-     **/
-    @PostMapping(value = ManageNodeRouter.GROUP_UPDATE)
-    public Result<String> groupUpdate(@RequestBody BbsNodeGroupParam param) {
-        baseService.updateNodeGroup(param);
-        return success();
     }
 
     /**
