@@ -63,3 +63,11 @@ sa-token:
   # 是否输出操作日志
   is-log: false
   auto-renew: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: 'zjnbit-bbs-server'

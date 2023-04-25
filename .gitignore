@@ -38,3 +38,5 @@ build/
 /web-api/src/main/resources/config/logback-local.xml
 /web-api/src/main/resources/config/application-prod.yml
 /web-api/src/main/resources/config/logback-prod.xml
+/web-api/src/main/resources/config/application-inet.yml
+/web-api/src/main/resources/config/logback-inet.xml
