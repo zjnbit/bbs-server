@@ -24,12 +24,12 @@
     <dependencies>
         <!-- zjnbit springboot -->
         <dependency>
-            <groupId>com.zjnbit.bbs</groupId>
-            <artifactId>web-spring-boot-starter</artifactId>
+            <groupId>com.zjnbit.framework</groupId>
+            <artifactId>web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.zjnbit.bbs</groupId>
-            <artifactId>db-spring-boot-starter</artifactId>
+            <groupId>com.zjnbit.framework</groupId>
+            <artifactId>db</artifactId>
         </dependency>
         <!-- 模版引擎 -->
         <dependency>
